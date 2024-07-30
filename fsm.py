@@ -52,13 +52,14 @@ executor.start_polling(dp, on_startup=on_startup, skip_updates=True)
 
 
 
+
+
 from aiogram import Bot, Dispatcher, types, executor
 from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from aiogram.dispatcher.storage import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.types import BotCommand
-
 from config import token
 from database import Database
 import logging
@@ -77,13 +78,13 @@ class Form(StatesGroup):
 @dp.message_handler(commands='start')
 async def start(message: Message):
     await Form.username.set()
-    await message.reply("Привет! Как тебя зовут ?")
+    await message.reply("Привет! Как тебя зовут?")
 
 @dp.message_handler(state=Form.username)
 async def process_username(message: Message, state: FSMContext):
     username = message.text
     await state.update_data(username=username)
-    await Form.next()  
+    await Form.next()
     await message.reply('Сколько тебе лет?')
 
 @dp.message_handler(state=Form.age)
@@ -91,7 +92,7 @@ async def process_age(message: Message, state: FSMContext):
     age = message.text
     user_data = await state.get_data()
     username = user_data.get('username')
-    db.add_user(message.from_user.id, username, age)  
+    db.add_user(message.from_user.id, username, age)
     await state.finish()
     await message.reply(f'Приятно познакомиться, {username}. Твой возраст: {age}')
 
