@@ -1,4 +1,4 @@
-"""Магические методы - dunder методы"""
+#"""Магические методы - dunder методы"""
 
 # class Work:
 #     def __init__(self, position, graphicks):
@@ -35,7 +35,7 @@ class Math:
         self.number_2 = number_2
         
     def __str__(self):
-        return f'Первое значение {self.number_1} \nВторое значение {self.number_2}'
+        return f'Первое значение: {self.number_1} \nВторое значение: {self.number_2}'
     
     def __add__(self, other): 
         """Создать новый объект как сумму координат 'self' и 'other'."""
@@ -54,8 +54,6 @@ class Math:
         print(f'Результат деленин {self.number_1} и {self.number_2}')
         return Math(self.number_1 / other.number_1, self.number_2)
     
-    
-    " Магические методы для операторов сравнения "
     
     def __gt__(self, other):
         return self.number_1 > other.number_1
@@ -165,5 +163,5 @@ class Book:
         return self.year != other.year
 
     def __str__(self):
-        return f"Title: {self.title}, Author: {self.author}, Year: {self.year}"
+        return f"Называние: {self.title}, Автор: {self.author}, год: {self.year}"
 
